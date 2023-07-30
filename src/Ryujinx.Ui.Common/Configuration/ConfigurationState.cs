@@ -262,6 +262,11 @@ namespace Ryujinx.Ui.Common.Configuration
             public ReactiveObject<bool> EnableFileLog { get; private set; }
 
             /// <summary>
+            /// Sets the amount of log files to be kept on the disk
+            /// </summary>
+            public ReactiveObject<string> MaximumNumberOfLogFiles { get; private set; }
+
+            /// <summary>
             /// Controls which OpenGL log messages are recorded in the log
             /// </summary>
             public ReactiveObject<GraphicsDebugLevel> GraphicsDebugLevel { get; private set; }
@@ -279,6 +284,7 @@ namespace Ryujinx.Ui.Common.Configuration
                 FilteredClasses = new ReactiveObject<LogClass[]>();
                 EnableFileLog = new ReactiveObject<bool>();
                 EnableFileLog.Event += static (sender, e) => LogValueChange(e, nameof(EnableFileLog));
+                MaximumNumberOfLogFiles = new ReactiveObject<string>();
                 GraphicsDebugLevel = new ReactiveObject<GraphicsDebugLevel>();
             }
         }

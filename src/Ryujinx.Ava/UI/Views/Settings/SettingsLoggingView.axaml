@@ -10,6 +10,7 @@
     mc:Ignorable="d"
     x:CompileBindings="True"
     x:DataType="viewModels:SettingsViewModel">
+    <UserControl.Resources></UserControl.Resources>
     <Design.DataContext>
         <viewModels:SettingsViewModel />
     </Design.DataContext>
@@ -27,10 +28,41 @@
                 Spacing="10">
                 <TextBlock Classes="h1" Text="{locale:Locale SettingsTabLoggingLogging}" />
                 <StackPanel Margin="10,0,0,0" Orientation="Vertical">
-                    <CheckBox IsChecked="{Binding EnableFileLog}"
-                              ToolTip.Tip="{locale:Locale FileLogTooltip}">
+                    <CheckBox 
+                        Name="CheckBoxEnableFileLog"
+                        IsChecked="{Binding EnableFileLog}"
+                                    ToolTip.Tip="{locale:Locale FileLogTooltip}">
                         <TextBlock Text="{locale:Locale SettingsTabLoggingEnableLoggingToFile}" />
                     </CheckBox>
+                    <StackPanel Orientation="Horizontal"
+                                IsEnabled="{Binding ElementName=CheckBoxEnableFileLog, Path=IsChecked}">
+                        <TextBlock VerticalAlignment="Center"
+                                   Text="{locale:Locale SettingsTabLoggingMaxLogFiles}"
+                                   ToolTip.Tip="{locale:Locale MaxLogFilesToolTip}"
+                                   Width="285"/>
+                        <ComboBox SelectedIndex="{Binding MaximumNumberOfLogFiles}"
+                                  Width="150"
+                                  HorizontalContentAlignment="Left"
+                                  VerticalAlignment="Center"
+                                  ToolTip.Tip="{locale:Locale MaxLogFilesToolTip}">
+                            <ComboBoxItem>
+                                <TextBlock Text="{locale:Locale SettingsTabLoggingMaxLogFiles3}" />
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <TextBlock Text="{locale:Locale SettingsTabLoggingMaxLogFiles5}" />
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <TextBlock
+                                    Text="{locale:Locale SettingsTabLoggingMaxLogFiles10}" />
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <TextBlock Text="{locale:Locale SettingsTabLoggingMaxLogFiles25}" />
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <TextBlock Text="{locale:Locale SettingsTabLoggingMaxLogFilesKeepAll}" />
+                            </ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
                     <CheckBox IsChecked="{Binding EnableStub}"
                               ToolTip.Tip="{locale:Locale StubLogTooltip}">
                         <TextBlock Text="{locale:Locale SettingsTabLoggingEnableStubLogs}" />

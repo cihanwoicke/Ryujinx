@@ -146,6 +146,7 @@ namespace Ryujinx.Ava.UI.ViewModels
         public bool EnableTextureRecompression { get; set; }
         public bool EnableMacroHLE { get; set; }
         public bool EnableFileLog { get; set; }
+        public string MaximumNumberOfLogFiles { get; set; }
         public bool EnableStub { get; set; }
         public bool EnableInfo { get; set; }
         public bool EnableWarn { get; set; }
@@ -438,6 +439,7 @@ namespace Ryujinx.Ava.UI.ViewModels
 
             // Logging
             EnableFileLog = config.Logger.EnableFileLog;
+            MaximumNumberOfLogFiles = config.Logger.MaximumNumberOfLogFiles;
             EnableStub = config.Logger.EnableStub;
             EnableInfo = config.Logger.EnableInfo;
             EnableWarn = config.Logger.EnableWarn;
