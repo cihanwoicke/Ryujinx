@@ -23,11 +23,18 @@ namespace Ryujinx.Common.Logging.Targets
             DirectoryInfo logDir = new(Path.Combine(path, "Logs"));
             logDir.Create();
 
-            // Clean up old logs, should only keep 3
-            FileInfo[] files = logDir.GetFiles("*.log").OrderBy((info => info.CreationTime)).ToArray();
-            for (int i = 0; i < files.Length - 2; i++)
+            int maxLogFiles = 3;
+
+            // Clean up old logs, should only keep as much as configured in settings
+            FileInfo[] oldLogFiles = logDir.GetFiles("*.log")
+                .OrderBy(info => info.CreationTime)
+                 // - 1 because a new log file is being created shortly after
+                .SkipLast(maxLogFiles - 1)
+                .ToArray();
+
+            foreach (FileInfo file in oldLogFiles)
             {
-                files[i].Delete();
+                file.Delete();
             }
 
             string version = ReleaseInformation.GetVersion();
