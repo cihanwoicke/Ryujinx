@@ -19,6 +19,7 @@ namespace Ryujinx.Ui.Common.Configuration
             ConfigurationState.Instance.Logger.EnableFsAccessLog.Event += ReloadEnableFsAccessLog;
             ConfigurationState.Instance.Logger.FilteredClasses.Event += ReloadFilteredClasses;
             ConfigurationState.Instance.Logger.EnableFileLog.Event += ReloadFileLogger;
+            ConfigurationState.Instance.Logger.LogRotation.Event += ReloadLogRotation;
         }
 
         private static void ReloadEnableDebug(object sender, ReactiveEventArgs<bool> e)
@@ -90,6 +91,11 @@ namespace Ryujinx.Ui.Common.Configuration
             {
                 Logger.RemoveTarget("file");
             }
+        }
+
+        private static void ReloadLogRotation(object sender, ReactiveEventArgs<int> e)
+        {
+            throw new NotImplementedException("We gotta do this right here right now, funk soul brotha!");
         }
     }
 }
